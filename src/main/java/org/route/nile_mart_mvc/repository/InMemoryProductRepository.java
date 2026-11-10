@@ -1,8 +1,8 @@
+
 package org.route.nile_mart_mvc.repository;
 
 import jakarta.annotation.PostConstruct;
 import org.route.nile_mart_mvc.model.Product;
-import org.route.nile_mart_mvc.repository.IProductRepository;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
@@ -11,43 +11,55 @@ import java.util.List;
 
 @Repository
 public class InMemoryProductRepository implements IProductRepository {
-    List<Product> myProducts = new ArrayList<>();
+
+    private final List<Product> products = new ArrayList<>();
 
     @PostConstruct
-    void init() {
-        myProducts.add(Product.builder()
+    public void init() {
+
+        products.add(Product.builder()
                 .sku("P002")
                 .name("Desk Lamp")
-                .price(BigDecimal.valueOf(500))
+                .category("lighting")
+                .brandSlug(null)
+                .price(new BigDecimal("500.00"))
                 .inStock(10)
-                .category("furniture")
                 .build());
-        myProducts.add(Product.builder()
+
+        products.add(Product.builder()
                 .sku("P003")
                 .name("ASUS TUF")
-                .price(BigDecimal.valueOf(24000))
+                .category("laptops")
+                .brandSlug("asus")
+                .price(new BigDecimal("24000.00"))
                 .inStock(4)
-                .category("Laptop")
+                .build());
+
+        products.add(Product.builder()
+                .sku("PH-A55-128")
+                .name("Samsung Galaxy A55 128GB")
+                .category("mobile-phones")
+                .brandSlug("samsung")
+                .price(new BigDecimal("18500.00"))
+                .inStock(7)
                 .build());
     }
 
     @Override
     public List<Product> findAll() {
-        return myProducts;
+        return new ArrayList<>(products);
     }
 
     @Override
     public Product findBySku(String sku) {
-        for (Product product : myProducts) {
-            if (product.getSku().equals(sku)) {
-                return product;
-            }
-        }
-        return null;
+        return products.stream()
+                .filter(product -> product.getSku().equalsIgnoreCase(sku))
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
     public void save(Product product) {
-        myProducts.add(product);
+        products.add(product);
     }
 }
