@@ -13,7 +13,7 @@ import java.util.List;
 public class ProductService {
 
 
-    private IProductRepository productRepository;
+    private final IProductRepository productRepository;
     private final CategoryService categoryService;
     private final BrandServices brandService;
 
@@ -23,8 +23,8 @@ public class ProductService {
         this.brandService = brandService;
     }
 
-    public List<Category> findAll() {
-        return categoryService.findAll();
+    public List<Product> findAll() {
+        return productRepository.findAll();
     }
 
     public List<Product> getAvailableProducts() {

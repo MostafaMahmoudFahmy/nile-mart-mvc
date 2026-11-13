@@ -82,7 +82,7 @@ public class CategoryService {
 
 
 
-    public String ValidateCategory(Category category) {
+    public String validateCategory(Category category) {
         String parentSlug = category.getParentSlug() == null ? "" : category.getParentSlug();
 
         // parent must exist and must be top level

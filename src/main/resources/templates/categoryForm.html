@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>NileMart - Add Category</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 35px;
+            background: #f5f6fa;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+            padding: 16px;
+            background: #222;
+            margin-bottom: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        form {
+            background: white;
+            padding: 25px;
+            max-width: 500px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+        }
+
+        input, select {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            box-sizing: border-box;
+        }
+
+        .error {
+            color: red;
+            font-size: 13px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #1769aa;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a th:href="@{/products}">Products</a>
+    <a th:href="@{/categories}">Categories</a>
+    <a th:href="@{/brands}">Brands</a>
+</nav>
+
+<h1>Add Category</h1>
+
+<form th:action="@{/categories}"
+      th:object="${category}"
+      method="post">
+
+    <label>Name</label>
+    <input type="text" th:field="*{name}">
+    <div class="error" th:errors="*{name}"></div>
+
+    <label>Slug</label>
+    <input type="text" th:field="*{slug}">
+    <div class="error" th:errors="*{slug}"></div>
+
+    <label>Parent</label>
+    <select th:field="*{parentSlug}">
+        <option value="">None (top level)</option>
+
+        <option th:each="parent : ${parentCategories}"
+                th:value="${parent.slug}"
+                th:text="${parent.name}">
+        </option>
+    </select>
+    <div class="error" th:errors="*{parentSlug}"></div>
+
+    <label>Display Order</label>
+    <input type="number" min="0" th:field="*{displayOrder}">
+    <div class="error" th:errors="*{displayOrder}"></div>
+
+    <label>
+        <input type="checkbox" th:field="*{active}" style="width:auto">
+        Active
+    </label>
+
+    <button type="submit">Save Category</button>
+</form>
+
+</body>
+</html>
