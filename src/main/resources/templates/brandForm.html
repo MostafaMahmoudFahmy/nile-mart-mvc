@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>NileMart - Add Brand</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 35px;
+            background: #f5f6fa;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+            padding: 16px;
+            background: #222;
+            margin-bottom: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        form {
+            background: white;
+            padding: 25px;
+            max-width: 500px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+        }
+
+        input {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            box-sizing: border-box;
+        }
+
+        .error {
+            color: red;
+            font-size: 13px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #1769aa;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a th:href="@{/products}">Products</a>
+    <a th:href="@{/categories}">Categories</a>
+    <a th:href="@{/brands}">Brands</a>
+</nav>
+
+<h1>Add Brand</h1>
+
+<form th:action="@{/brands}"
+      th:object="${brand}"
+      method="post">
+
+    <label>Name</label>
+    <input type="text" th:field="*{name}">
+    <div class="error" th:errors="*{name}"></div>
+
+    <label>Slug</label>
+    <input type="text" th:field="*{slug}">
+    <div class="error" th:errors="*{slug}"></div>
+
+    <label>
+        <input type="checkbox" th:field="*{active}" style="width:auto">
+        Active
+    </label>
+
+    <button type="submit">Save Brand</button>
+</form>
+
+</body>
+</html>
