@@ -3,11 +3,13 @@ package org.route.nile_mart_mvc.service;
 import org.route.nile_mart_mvc.model.Brand;
 import org.route.nile_mart_mvc.model.Category;
 import org.route.nile_mart_mvc.repository.InMemoryCategoryRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+@Service
 public class CategoryService {
 
     private final InMemoryCategoryRepository inMemoryCategoryRepository;

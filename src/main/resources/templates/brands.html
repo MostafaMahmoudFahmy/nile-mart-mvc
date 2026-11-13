@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>NileMart - Brands</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 35px;
+            background: #f5f6fa;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+            padding: 16px;
+            background: #222;
+            margin-bottom: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            padding: 13px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background: #333;
+            color: white;
+        }
+
+        .add-button {
+            display: inline-block;
+            background: #1769aa;
+            color: white;
+            padding: 10px 16px;
+            text-decoration: none;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a th:href="@{/products}">Products</a>
+    <a th:href="@{/categories}">Categories</a>
+    <a th:href="@{/brands}">Brands</a>
+</nav>
+
+<h1>Brands</h1>
+
+<a class="add-button" th:href="@{/brands/new}">
+    Add New Brand
+</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Slug</th>
+        <th>Active</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="brand : ${brands}">
+        <td th:text="${brand.name}"></td>
+        <td th:text="${brand.slug}"></td>
+        <td th:text="${brand.active ? 'Yes' : 'No'}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

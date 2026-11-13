@@ -2,9 +2,10 @@ package org.route.nile_mart_mvc.service;
 
 import org.route.nile_mart_mvc.model.Brand;
 import org.route.nile_mart_mvc.repository.InMemoryBrandRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class BrandServices {
 
     private final InMemoryBrandRepository inMemoryBrandRepository;
